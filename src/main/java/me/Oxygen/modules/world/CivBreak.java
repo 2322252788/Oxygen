@@ -67,7 +67,7 @@ extends Module {
     	}
     }
     
-    private final static float[] getAngles(final EntityPlayerSP player,final BlockPos blockPos) {
+    private final float[] getAngles(final EntityPlayerSP player,final BlockPos blockPos) {
         double difX = blockPos.getX() + 0.5D - player.posX;
         double difY = blockPos.getY() - (player.posY + player.getEyeHeight());
         double difZ = blockPos.getZ() + 0.5D - player.posZ;
