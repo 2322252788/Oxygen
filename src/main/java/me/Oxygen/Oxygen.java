@@ -32,6 +32,7 @@ public class Oxygen {
 	
 	public String CLIENT_NAME = "Oxygen";
 	public final String CLIENT_VERSION = "1.0";
+	public final String bulid = "2020721";
 	public final String copyright = "Private client - " + CLIENT_NAME + " " + CLIENT_VERSION + "- Rainbow";
 	
 	public EventManager EventMgr;
@@ -53,7 +54,7 @@ public class Oxygen {
 		this.crink = new me.Oxygen.ui.clickgui3.UIClick();
 		this.font = new FontLoader();
 		this.FileMgr = new FileManager();
-		Display.setTitle("Oxygen | Minecraft 1.8.9(Forge)");
+		Display.setTitle("Oxygen");
 		new Check();
 		new RotationUtils();
 		System.gc();

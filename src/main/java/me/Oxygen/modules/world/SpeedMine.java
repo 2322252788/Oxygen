@@ -80,17 +80,19 @@ public class SpeedMine extends Module
                 }
             }
         }
-        if (e instanceof EventUpdate && mode.isCurrentMode("HuaYuTing")){
-            if(mc.playerController.extendedReach()) {
-                ((IPlayerControllerMP)mc.playerController).setBlockHitDelay(0);
-            }
-            else if(bzs) {
-                bzx += (mc.theWorld.getBlockState(pos).getBlock().getPlayerRelativeBlockHardness(mc.thePlayer, mc.theWorld, pos) * 1.4);
-                if (bzx >= 1.0) {
-                    mc.theWorld.setBlockState(pos, Blocks.air.getDefaultState(), 11);
-                    mc.thePlayer.sendQueue.getNetworkManager().sendPacket(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.STOP_DESTROY_BLOCK, pos, face));
-                    bzx = 0.0;
-                    bzs = false;
+        if (e instanceof EventUpdate) {
+            this.setDisplayName(mode.getModeAt(mode.getCurrentMode()));
+            if (mode.isCurrentMode("HuaYuTing")) {
+                if (mc.playerController.extendedReach()) {
+                    ((IPlayerControllerMP) mc.playerController).setBlockHitDelay(0);
+                } else if (bzs) {
+                    bzx += (mc.theWorld.getBlockState(pos).getBlock().getPlayerRelativeBlockHardness(mc.thePlayer, mc.theWorld, pos) * 1.4);
+                    if (bzx >= 1.0) {
+                        mc.theWorld.setBlockState(pos, Blocks.air.getDefaultState(), 11);
+                        mc.thePlayer.sendQueue.getNetworkManager().sendPacket(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.STOP_DESTROY_BLOCK, pos, face));
+                        bzx = 0.0;
+                        bzs = false;
+                    }
                 }
             }
         }

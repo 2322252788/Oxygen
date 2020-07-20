@@ -64,7 +64,8 @@ public class HUD extends Module{
 				Oxygen.INSTANCE.font.tahoma40.drawString("________", 4.0f, +15.0f, RenderUtil.reAlpha(Colors.BLACK.c, 0.75f));
 				Oxygen.INSTANCE.font.tahoma20.drawString("X:" + x1 + " " + "Y:" + y1 + " " + "Z:" + z1, 92.0f/2.0f - 40.0f, 38.0f, RenderUtil.reAlpha(Colors.BLACK.c, 0.75f));
 				Oxygen.INSTANCE.font.tahoma20.drawString("FPS:" + Minecraft.getDebugFPS(), 92.0f/2.0f - 40.0f, 50.0f, RenderUtil.reAlpha(Colors.BLACK.c, 0.75f));
-				
+				Oxygen.INSTANCE.font.sansation18.drawStringWithShadow("Oxygen for Minecraft 1.8.9(Forge) - Build " + Oxygen.INSTANCE.bulid, (float) (sr.getScaledWidth() - Oxygen.INSTANCE.font.sansation18.getStringWidth("Oxygen for Minecraft 1.8.9(Forge) - Build " + Oxygen.INSTANCE.bulid) - 4F), (float) (sr.getScaledHeight() - 12F), 0xFFFAFA);
+
 	        if(this.array.getValueState().booleanValue()) {
 				ArrayList<Module> mods = new ArrayList<Module>(Oxygen.INSTANCE.ModMgr.getToggled());
 				mods.sort(this.comparator);
