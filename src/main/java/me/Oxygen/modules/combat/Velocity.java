@@ -20,7 +20,7 @@ public class Velocity extends Module {
 	private Value<Double> horizontal = new Value<Double>("Velocity_Horizontal", 0.03, 0.0, 1.0, 0.01);
 	private Value<Double> vertical = new Value<Double>("Velocity_Vertical", 0.02, 0.0, 1.0, 0.01);
 	private Value<Boolean> hyt = new Value<Boolean>("Velocity_HuaYuTing",false);
-	private Value<Boolean> explosion = new Value<Boolean>("Explosion",false);
+	private Value<Boolean> explosion = new Value<Boolean>("Velocity_Explosion",false);
 
     public Velocity() {
     	this.mode.addValue("Normal");
