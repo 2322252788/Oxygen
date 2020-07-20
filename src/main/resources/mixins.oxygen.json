@@ -6,6 +6,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [   
     "MixinC03PacketPlayer",
+    "MixinC07PacketPlayerDigging",
     "MixinEntity",
     "MixinEntityLivingBase",
     "MixinEntityPlayer",
