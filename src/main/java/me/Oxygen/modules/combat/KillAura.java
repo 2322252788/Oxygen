@@ -366,7 +366,7 @@ public class KillAura extends Module
 	}
 
 	private void doBlock(final boolean setItemUseInCount) {
-		if (setItemUseInCount&& !this.isServer("59.111.137.99")) {
+		if (setItemUseInCount) {
 			((IEntityPlayer)mc.thePlayer).setItemInUseCount(mc.thePlayer.getHeldItem().getMaxItemUseDuration());
 		}
 		final NetworkManager networkManager = mc.thePlayer.sendQueue.getNetworkManager();
@@ -381,7 +381,7 @@ public class KillAura extends Module
 	}
 
 	private void unBlock(final boolean setItemUseInCount) {
-		if (setItemUseInCount && !this.isServer("59.111.137.99")) {
+		if (setItemUseInCount) {
 			((IEntityPlayer)mc.thePlayer).setItemInUseCount(0);
 		}
 		if(this.blockMode.isCurrentMode("Hypixel")) {
