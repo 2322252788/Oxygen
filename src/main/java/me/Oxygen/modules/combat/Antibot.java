@@ -32,7 +32,7 @@ public class Antibot extends Module {
 	private final Value<Boolean> cnhyp = new Value<Boolean>("Antibot_CNHypixel", false);
 
 	public Antibot() {
-		mode.mode.add("WatchDog");
+		mode.addValue("WatchDog");
 		mode.addValue("HuaYuTing");
 	}
 
