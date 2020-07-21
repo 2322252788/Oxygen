@@ -54,7 +54,7 @@ public class Oxygen {
 		this.crink = new me.Oxygen.ui.clickgui3.UIClick();
 		this.font = new FontLoader();
 		this.FileMgr = new FileManager();
-		Display.setTitle("Oxygen");
+		Display.setTitle("Oxygen " + bulid);
 		new Check();
 		new RotationUtils();
 		System.gc();
