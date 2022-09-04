@@ -1,34 +1,27 @@
 {
   "required": true,
-  "minVersion": "0.7.10",
-  "package": "me.Oxygen.injection.mixins",
+  "minVersion": "0.7.11",
+  "package": "cn.rainbow.oxygen.injection.mixins",
   "refmap": "mixins.oxygen.refmap.json",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [   
-    "MixinC03PacketPlayer",
-    "MixinC07PacketPlayerDigging",
+  "mixins": [
     "MixinEntity",
     "MixinEntityLivingBase",
-    "MixinEntityPlayer",
+    "MixinGuiIngame",
+    "MixinGuiMainMenu",
+    "MixinGuiNewChat",
+    "MixinMinecraft",
+    "MixinNetworkManager"
+  ],
+  "client": [
     "MixinEntityPlayerSP",
     "MixinEntityRenderer",
-    "MixinFontRenderer",
     "MixinGuiChat",
-    "MixinGuiIngame",
-    "MixinGuiNewChat",
-    "MixinGuiMainMenu",
-    "MixinGuiPlayerTabOverlay",
     "MixinItemRenderer",
-    "MixinKeyBinding",
-    "MixinMinecraft" ,
-    "MixinNetworkManager",
     "MixinPlayerControllerMP",
-    "MixinRender",
     "MixinRenderEntityItem",
     "MixinRendererLivingEntity",
-    "MixinRenderManager",
-    "MixinS08PacketPlayerPosLook",
-    "MixinS12PacketEntityVelocity",
-    "MixinS27PacketExplosion"
+    "MixinTileEntityChestRenderer",
+    "MixinTileEntityEnderChestRenderer"
   ]
 }
