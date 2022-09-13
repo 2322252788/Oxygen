@@ -1,7 +1,7 @@
 package cn.rainbow.oxygen.gui.font;
 
 import cn.rainbow.oxygen.Oxygen;
-import cn.rainbow.oxygen.gui.font.fluxfont.FontUtils;
+import cn.rainbow.oxygen.gui.font.cfont.CFontRenderer;
 import net.minecraft.client.Minecraft;
 
 import java.awt.*;
@@ -15,10 +15,9 @@ public class FontManager {
     public UnicodeFontRenderer wqy12 = getFont("wqy.ttf", 12, GlyphLoad.Normal);
     public UnicodeFontRenderer wqy14 = getFont("wqy.ttf", 14, GlyphLoad.Normal);
     public UnicodeFontRenderer wqy15 = getFont("wqy.ttf", 15, GlyphLoad.Normal);
-    public FontUtils wqy16 = new FontUtils("wqy.ttf", Font.PLAIN, 16, 7, true);
+    public CFontRenderer wqy16 = getFont("wqy.ttf", 16, true);
     public UnicodeFontRenderer wqy17 = getFont("wqy.ttf", 17, GlyphLoad.Normal);
-    public FontUtils owqy18 = new FontUtils("wqy.ttf", Font.PLAIN, 18, 7, true);
-    public UnicodeFontRenderer wqy18 = getFont("wqy.ttf", 18, GlyphLoad.Normal);
+    public CFontRenderer wqy18 = getFont("wqy.ttf", 18, true);
     public UnicodeFontRenderer wqy20 = getFont("wqy.ttf", 20, GlyphLoad.Normal);
     public UnicodeFontRenderer wqy22 = getFont("wqy.ttf", 22, GlyphLoad.Normal);
     public UnicodeFontRenderer wqy30 = getFont("wqy.ttf", 30, GlyphLoad.Normal);
@@ -36,18 +35,8 @@ public class FontManager {
     public UnicodeFontRenderer comfortaa10 = getFont("comfortaa.ttf", 10, GlyphLoad.Normal);
     public UnicodeFontRenderer comfortaa12 = getFont("comfortaa.ttf", 12, GlyphLoad.Normal);
 
-    public OxygenFont getFont(String name, int size) {
-        Font font;
-        try {
-            InputStream inputStream = this.getClass()
-                    .getResourceAsStream("/assets/minecraft/Oxygen/fonts/" + name);
-            font = Font.createFont(0, inputStream);
-            font = font.deriveFont(Font.PLAIN, size);
-        } catch (Exception exception) {
-            Oxygen.getLogger().error("Error loading font", exception);
-            font = new Font("default", Font.PLAIN, size);
-        }
-        return new OxygenFont(font, size, true);
+    public CFontRenderer getFont(String name, int size, boolean allChar) {
+        return new CFontRenderer(name, size, allChar);
     }
 
     public UnicodeFontRenderer getFont(String name, float size, GlyphLoad loadType) {

@@ -2,6 +2,7 @@ package cn.rainbow.oxygen.utils.KeyStrokes;
 
 import cn.rainbow.oxygen.Oxygen;
 import cn.rainbow.oxygen.gui.font.UnicodeFontRenderer;
+import cn.rainbow.oxygen.gui.font.cfont.CFontRenderer;
 import cn.rainbow.oxygen.module.modules.render.KeyStrokes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -24,7 +25,7 @@ public class MouseButton {
     private int color = 255;
     private double textBrightness = 1.0;
     RainbowUtils Rainbow = new RainbowUtils();
-    UnicodeFontRenderer font;
+    CFontRenderer font;
     UnicodeFontRenderer fontS;
 
     public MouseButton(int button, int xOffset, int yOffset) {

@@ -1,7 +1,7 @@
 package cn.rainbow.oxygen.gui.buttons;
 
 import cn.rainbow.oxygen.Oxygen;
-import cn.rainbow.oxygen.gui.font.fluxfont.FontUtils;
+import cn.rainbow.oxygen.gui.font.cfont.CFontRenderer;
 import cn.rainbow.oxygen.utils.render.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -23,7 +23,7 @@ public class UIFlatButton extends GuiButton {
    protected boolean hovered;
    private int color;
    private float opacity;
-   private FontUtils font;
+   private CFontRenderer font;
 
    public UIFlatButton(int buttonId, int x, int y, int widthIn, int heightIn, String buttonText, int color) {
       super(buttonId, x, y, 10, 12, buttonText);
@@ -39,7 +39,7 @@ public class UIFlatButton extends GuiButton {
       this.font = Oxygen.INSTANCE.fontmanager.wqy16;
    }
 
-   public UIFlatButton(int buttonId, int x, int y, int widthIn, int heightIn, String buttonText, int color, FontUtils font) {
+   public UIFlatButton(int buttonId, int x, int y, int widthIn, int heightIn, String buttonText, int color, CFontRenderer font) {
       super(buttonId, x, y, 10, 12, buttonText);
       this.width = widthIn;
       this.height = heightIn;
@@ -93,7 +93,7 @@ public class UIFlatButton extends GuiButton {
          GL11.glScaled(1.0D, 1.0D, 1.0D);
          boolean var6 = true;
          float var10000 = (float)this.font.getStringWidth(StringUtils.stripControlCodes(this.displayString));
-         this.font.drawString(this.displayString, (float)(this.xPosition + this.width / 2) - 6, (float)this.yPosition + (float)(this.height - this.font.FONT_HEIGHT) / 2.0F + 0, this.hovered ? -1 : -1);
+         this.font.drawString(this.displayString, (float)(this.xPosition + this.width / 2) - 6, (float)this.yPosition + (float)(this.height - this.font.getHeight()) / 2.0F + 0, this.hovered ? -1 : -1);
          GL11.glPopAttrib();
          GL11.glPopMatrix();
       }

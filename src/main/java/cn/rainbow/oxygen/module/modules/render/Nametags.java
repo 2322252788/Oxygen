@@ -13,7 +13,7 @@ import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
 import cn.rainbow.oxygen.event.events.Render2DEvent;
 import cn.rainbow.oxygen.event.events.Render3DEvent;
-import cn.rainbow.oxygen.gui.font.fluxfont.FontUtils;
+import cn.rainbow.oxygen.gui.font.cfont.CFontRenderer;
 import cn.rainbow.oxygen.gui.font.UnicodeFontRenderer;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
@@ -82,7 +82,7 @@ public class Nametags extends Module {
                         continue;
                     }
 
-                    FontUtils font = Oxygen.INSTANCE.fontmanager.wqy16;
+                    CFontRenderer font = Oxygen.INSTANCE.fontmanager.wqy16;
 
                     GlStateManager.translate(renderPositions[0] / scaledRes.getScaleFactor(), renderPositions[1] / scaledRes.getScaleFactor(), 0.0D);
 
@@ -235,7 +235,7 @@ public class Nametags extends Module {
                     continue;
                 }
 
-                FontUtils font = Oxygen.INSTANCE.fontmanager.owqy18;
+                CFontRenderer font = Oxygen.INSTANCE.fontmanager.wqy18;
 
                 GlStateManager.translate(renderPositions[0] / scaledRes.getScaleFactor(), renderPositions[1] / scaledRes.getScaleFactor(), 0.0D);
                 scale();
@@ -248,7 +248,7 @@ public class Nametags extends Module {
                 str = str + suff;
 
                 float strWidth = font.getStringWidth(str.replaceAll("\247.", ""));
-                float strWidth2 = Oxygen.INSTANCE.fontmanager.comfortaa12.getStringWidth(health);;
+                float strWidth2 = Oxygen.INSTANCE.fontmanager.comfortaa12.getStringWidth(health);
                 float allWidth = (strWidth > strWidth2 ? strWidth : strWidth2) + 8;
                 RenderUtil.drawRect(-allWidth / 2, -25.0f, allWidth / 2, 0, ColorUtils.getColor(0, 130));
                 int x3 = ((int) (renderPositions[0] + -allWidth / 2 - 3) / 2) - 26;
