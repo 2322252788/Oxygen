@@ -1,7 +1,7 @@
 package cn.rainbow.oxygen.injection.mixins;
 
 import cn.rainbow.oxygen.Oxygen;
-import cn.rainbow.oxygen.event.events.EventStrafe;
+import cn.rainbow.oxygen.event.events.StrafeEvent;
 import cn.rainbow.oxygen.injection.interfaces.IEntity;
 import cn.rainbow.oxygen.module.modules.combat.Hitbox;
 import net.minecraft.client.Minecraft;
@@ -36,7 +36,7 @@ public class MixinEntity implements IEntity {
 		if ((Object) this != Minecraft.getMinecraft().thePlayer)
 			return;
 
-		final EventStrafe strafeEvent = new EventStrafe(strafe, forward, friction);
+		final StrafeEvent strafeEvent = new StrafeEvent(strafe, forward, friction);
 		strafeEvent.call();
 
 		if (strafeEvent.isCancelled())

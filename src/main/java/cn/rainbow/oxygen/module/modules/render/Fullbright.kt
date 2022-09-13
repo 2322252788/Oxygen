@@ -3,7 +3,7 @@ package cn.rainbow.oxygen.module.modules.render
 import cn.rainbow.oxygen.event.Event
 import cn.rainbow.oxygen.event.EventTarget
 import cn.rainbow.oxygen.module.setting.ModeValue
-import cn.rainbow.oxygen.event.events.EventUpdate
+import cn.rainbow.oxygen.event.events.UpdateEvent
 import cn.rainbow.oxygen.module.Category
 import cn.rainbow.oxygen.module.Module
 import net.minecraft.potion.Potion
@@ -18,9 +18,9 @@ class Fullbright : Module("Fullbright", Category.Render) {
         mode.addValue("Potion")
     }
 
-    @EventTarget(events = [EventUpdate::class])
+    @EventTarget(events = [UpdateEvent::class])
     fun onUpdate(event: Event?) {
-        if (event is EventUpdate) {
+        if (event is UpdateEvent) {
             displayName = mode.currentValue
             if (mode.isCurrentMode("Gamma")) {
                 oldGammaSetting = mc.gameSettings.gammaSetting

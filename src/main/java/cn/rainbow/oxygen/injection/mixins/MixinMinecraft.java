@@ -2,7 +2,7 @@ package cn.rainbow.oxygen.injection.mixins;
 
 import cn.rainbow.oxygen.Helper;
 import cn.rainbow.oxygen.Oxygen;
-import cn.rainbow.oxygen.event.events.EventClickMouse;
+import cn.rainbow.oxygen.event.events.ClickMouseEvent;
 import cn.rainbow.oxygen.event.events.KeyEvent;
 import cn.rainbow.oxygen.event.events.TickEvent;
 import cn.rainbow.oxygen.module.Module;
@@ -71,12 +71,12 @@ public class MixinMinecraft {
 
     @Inject(method = "clickMouse", at = @At("HEAD"))
     private void clickMouse(CallbackInfo ci) {
-        new EventClickMouse(0).call();
+        new ClickMouseEvent(0).call();
     }
 
     @Inject(method = "rightClickMouse", at = @At("HEAD"))
     private void rightClickMouse(CallbackInfo ci) {
-        new EventClickMouse(1).call();
+        new ClickMouseEvent(1).call();
     }
 
     @Inject(method = "createDisplay", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;setTitle(Ljava/lang/String;)V", shift = At.Shift.AFTER))

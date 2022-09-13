@@ -2,7 +2,7 @@ package cn.rainbow.oxygen.module.modules.render;
 
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventRender3D;
+import cn.rainbow.oxygen.event.events.Render3DEvent;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -31,9 +31,9 @@ public class Projectiles extends Module {
 		super("Projectiles", Category.Render);
 	}
 
-	@EventTarget(events = EventRender3D.class)
+	@EventTarget(events = Render3DEvent.class)
 	public void onRender(Event event) {
-		if(event instanceof EventRender3D) {
+		if(event instanceof Render3DEvent) {
 			if (this.mc.thePlayer.inventory.getCurrentItem() != null) {
 				EntityPlayerSP player = this.mc.thePlayer;
 				ItemStack stack = player.inventory.getCurrentItem();

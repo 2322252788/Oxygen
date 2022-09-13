@@ -2,8 +2,8 @@ package cn.rainbow.oxygen.module.modules.render;
 
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventRender2D;
-import cn.rainbow.oxygen.event.events.EventRender3D;
+import cn.rainbow.oxygen.event.events.Render2DEvent;
+import cn.rainbow.oxygen.event.events.Render3DEvent;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
 import cn.rainbow.oxygen.module.setting.BooleanValue;
@@ -47,9 +47,9 @@ public class BlockOverlay extends Module {
         return this.renderstring.getCurrentValue();
     }
     
-    @EventTarget(events = {EventRender2D.class, EventRender3D.class})
+    @EventTarget(events = {Render2DEvent.class, Render3DEvent.class})
     private void onRender(final Event event) {
-	    if (event instanceof EventRender2D){
+	    if (event instanceof Render2DEvent){
             if (this.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                 FontRenderer fr = this.mc.fontRendererObj;
                 BlockPos pos = this.mc.objectMouseOver.getBlockPos();
@@ -68,7 +68,7 @@ public class BlockOverlay extends Module {
                 }
             }
         }
-        if (event instanceof EventRender3D) {
+        if (event instanceof Render3DEvent) {
             if (this.mc.objectMouseOver != null && this.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                 BlockPos pos = this.mc.objectMouseOver.getBlockPos();
                 Block block = this.mc.theWorld.getBlockState(pos).getBlock();

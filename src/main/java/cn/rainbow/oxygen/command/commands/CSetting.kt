@@ -52,7 +52,7 @@ class CSetting : SimpleCommand("Setting", arrayOf("setting", "set")) {
             }
         }
         if (!set) {
-            logger.error("未找到该Mode, 支持的范围列表如下: ${Arrays.toString(setting.getOptions().toArray())}")
+            logger.error("未找到该Mode, 支持的范围如下: ${Arrays.toString(setting.getOptions().toArray())}")
         }
     }
 

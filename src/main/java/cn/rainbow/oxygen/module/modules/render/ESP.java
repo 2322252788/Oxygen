@@ -3,8 +3,8 @@ package cn.rainbow.oxygen.module.modules.render;
 import cn.rainbow.oxygen.Oxygen;
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventRender2D;
-import cn.rainbow.oxygen.event.events.EventRender3D;
+import cn.rainbow.oxygen.event.events.Render2DEvent;
+import cn.rainbow.oxygen.event.events.Render3DEvent;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
 import cn.rainbow.oxygen.module.modules.client.TargetEntity;
@@ -35,10 +35,10 @@ public class ESP extends Module {
 		super("ESP", Category.Render);
 	}
 	
-	@EventTarget(events = {EventRender3D.class, EventRender2D.class})
+	@EventTarget(events = {Render3DEvent.class, Render2DEvent.class})
 	public void onRender(Event event) {
-		if(event instanceof EventRender3D) {
-			EventRender3D er3 = (EventRender3D) event;
+		if(event instanceof Render3DEvent) {
+			Render3DEvent er3 = (Render3DEvent) event;
             this.setDisplayName(this.mode.getCurrentValue());
 			if(this.mode.isCurrentMode("Box")) {//Box
 				this.doBoxESP(er3);
@@ -47,14 +47,14 @@ public class ESP extends Module {
 				ESP2D.INSTANCE.updatePositions(mc);
 			}
 		}
-		if (event instanceof EventRender2D) {
+		if (event instanceof Render2DEvent) {
 			if(this.mode.isCurrentMode("2D")) {//2D
 				ESP2D.INSTANCE.renderBox(mc);
 			}
 		}
 	}
 	
-	private void doBoxESP(EventRender3D event) {
+	private void doBoxESP(Render3DEvent event) {
         GL11.glBlendFunc(770, 771);
         GL11.glEnable(3042);
         GL11.glEnable(2848);

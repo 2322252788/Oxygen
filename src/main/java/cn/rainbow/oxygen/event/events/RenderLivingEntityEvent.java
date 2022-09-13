@@ -3,7 +3,7 @@ package cn.rainbow.oxygen.event.events;
 import cn.rainbow.oxygen.event.Event;
 import net.minecraft.entity.EntityLivingBase;
 
-public class EventRenderLivingEntity extends Event {
+public class RenderLivingEntityEvent extends Event {
 
     private Type type;
 	private EntityLivingBase entity;
@@ -15,7 +15,7 @@ public class EventRenderLivingEntity extends Event {
     private float chestRot;
     private float offset;
 
-    public EventRenderLivingEntity(final EntityLivingBase entity, final Type type, final float limbSwing, final float limbSwingAmount, final float ageInTicks, final float rotationYawHead, final float rotationPitch, final float chestRot, final float offset) {
+    public RenderLivingEntityEvent(final EntityLivingBase entity, final Type type, final float limbSwing, final float limbSwingAmount, final float ageInTicks, final float rotationYawHead, final float rotationPitch, final float chestRot, final float offset) {
         this.entity = entity;
         this.type = type;
         this.limbSwing = limbSwing;
@@ -27,7 +27,7 @@ public class EventRenderLivingEntity extends Event {
         this.offset = offset;
     }
 
-    public EventRenderLivingEntity(final EntityLivingBase entity, final Type type) {
+    public RenderLivingEntityEvent(final EntityLivingBase entity, final Type type) {
         this.entity = entity;
         this.type = type;
     }

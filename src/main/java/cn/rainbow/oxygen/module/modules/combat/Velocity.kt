@@ -4,7 +4,7 @@ import cn.rainbow.oxygen.event.Event
 import cn.rainbow.oxygen.event.EventTarget
 import cn.rainbow.oxygen.module.setting.NumberValue
 import cn.rainbow.oxygen.module.setting.ModeValue
-import cn.rainbow.oxygen.event.events.EventPacket
+import cn.rainbow.oxygen.event.events.PacketEvent
 import cn.rainbow.oxygen.module.Category
 import cn.rainbow.oxygen.module.Module
 import net.minecraft.network.play.server.S12PacketEntityVelocity
@@ -23,11 +23,11 @@ class Velocity : Module("Velocity", Category.Combat) {
         mode.addValue("AAC2")
     }
 
-    @EventTarget(events = [EventPacket::class])
+    @EventTarget(events = [PacketEvent::class])
     private fun onPacketReceive(event: Event) {
         displayName = mode.currentValue
-        if (event is EventPacket) {
-            if (event.packetType == EventPacket.PacketType.Recieve) {
+        if (event is PacketEvent) {
+            if (event.packetType == PacketEvent.PacketType.Recieve) {
                 if (mode.isCurrentMode("AAC")) {
                     if (mc.thePlayer.hurtTime > 0) {
                         mc.thePlayer.motionX *= 0.6

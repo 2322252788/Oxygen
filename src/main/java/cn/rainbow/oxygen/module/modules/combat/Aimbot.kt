@@ -2,7 +2,7 @@ package cn.rainbow.oxygen.module.modules.combat
 
 import cn.rainbow.oxygen.event.Event
 import cn.rainbow.oxygen.event.EventTarget
-import cn.rainbow.oxygen.event.events.EventStrafe
+import cn.rainbow.oxygen.event.events.StrafeEvent
 import cn.rainbow.oxygen.module.Category
 import cn.rainbow.oxygen.module.Module
 import cn.rainbow.oxygen.module.setting.BooleanValue
@@ -27,9 +27,9 @@ class Aimbot : Module("Aimbot", Category.Combat) {
 
     private val clickTimer = MSTimer()
 
-    @EventTarget(events = [EventStrafe::class])
+    @EventTarget(events = [StrafeEvent::class])
     fun onStrafe(event: Event) {
-        if (event is EventStrafe) {
+        if (event is StrafeEvent) {
             if (mc.gameSettings.keyBindAttack.isKeyDown) {
                 clickTimer.reset()
             }

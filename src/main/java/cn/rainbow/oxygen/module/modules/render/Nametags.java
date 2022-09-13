@@ -11,8 +11,8 @@ import java.util.Map;
 import cn.rainbow.oxygen.Oxygen;
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventRender2D;
-import cn.rainbow.oxygen.event.events.EventRender3D;
+import cn.rainbow.oxygen.event.events.Render2DEvent;
+import cn.rainbow.oxygen.event.events.Render3DEvent;
 import cn.rainbow.oxygen.gui.font.fluxfont.FontUtils;
 import cn.rainbow.oxygen.gui.font.UnicodeFontRenderer;
 import cn.rainbow.oxygen.module.Category;
@@ -51,9 +51,9 @@ public class Nametags extends Module {
     	this.mode.addValue("New");
     }
     
-    @EventTarget(events = {EventRender3D.class, EventRender2D.class})
+    @EventTarget(events = {Render3DEvent.class, Render2DEvent.class})
     private void onEvent(final Event event) {
-        if (event instanceof EventRender2D) {
+        if (event instanceof Render2DEvent) {
             if(this.mode.isCurrentMode("Normal")) {
                 renderNormal();
             }
@@ -61,7 +61,7 @@ public class Nametags extends Module {
                 renderNew();
             }
         }
-        if (event instanceof EventRender3D) {
+        if (event instanceof Render3DEvent) {
             try {
                 updatePositions();
             } catch (Exception ignored) {}

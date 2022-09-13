@@ -1,7 +1,7 @@
 package cn.rainbow.oxygen
 
 import cn.rainbow.oxygen.event.Event
-import cn.rainbow.oxygen.event.events.EventWorldChange
+import cn.rainbow.oxygen.event.events.WorldChangeEvent
 import net.minecraft.client.Minecraft
 import net.minecraft.client.multiplayer.WorldClient
 
@@ -24,7 +24,7 @@ object Helper {
 
         if (worldChange != world) {
             worldChange = world
-            EventWorldChange().call()
+            WorldChangeEvent().call()
         }
     }
 

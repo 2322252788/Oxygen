@@ -2,7 +2,7 @@ package cn.rainbow.oxygen.module.modules.render;
 
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventAttack;
+import cn.rainbow.oxygen.event.events.AttackEvent;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
 import cn.rainbow.oxygen.module.setting.BooleanValue;
@@ -19,10 +19,10 @@ public class MoreParticle extends Module {
 		super("MoreParticle", Category.Render);
 	}
 
-	@EventTarget(events = EventAttack.class)
+	@EventTarget(events = AttackEvent.class)
 	private void onEvent(Event e) {
-		if(e instanceof EventAttack) {
-			EventAttack ea = (EventAttack)e;
+		if(e instanceof AttackEvent) {
+			AttackEvent ea = (AttackEvent)e;
 			for (int index = 0; index < CrackSize.getCurrentValue(); ++index) {
 	            if (Crit.getCurrentValue()) {
 	                mc.effectRenderer.emitParticleAtEntity(ea.getEntity(), EnumParticleTypes.CRIT);

@@ -2,8 +2,8 @@ package cn.rainbow.oxygen.module.modules.combat;
 
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventClickMouse;
-import cn.rainbow.oxygen.event.events.EventUpdate;
+import cn.rainbow.oxygen.event.events.ClickMouseEvent;
+import cn.rainbow.oxygen.event.events.UpdateEvent;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
 import cn.rainbow.oxygen.module.setting.BooleanValue;
@@ -51,9 +51,9 @@ public class AutoClicker extends Module {
 				* (this.minCps.getCurrentValue() - this.maxCps.getCurrentValue()));
 	}
 
-	@EventTarget(events = {EventUpdate.class, EventClickMouse.class})
+	@EventTarget(events = {UpdateEvent.class, ClickMouseEvent.class})
 	public void onUpdate(Event event) {
-		if(event instanceof EventUpdate) {
+		if(event instanceof UpdateEvent) {
 			if (mc.thePlayer != null) {
 				isClicking = false;
 
@@ -102,7 +102,7 @@ public class AutoClicker extends Module {
 				++this.timer;
 			}
 		}
-		if(event instanceof EventClickMouse) {
+		if(event instanceof ClickMouseEvent) {
 			ItemStack stack = mc.thePlayer.getCurrentEquippedItem();
 			if (stack != null && this.blockHit.getCurrentValue()) {
 				if (stack.getItem() instanceof ItemSword && !mc.thePlayer.isUsingItem()) {

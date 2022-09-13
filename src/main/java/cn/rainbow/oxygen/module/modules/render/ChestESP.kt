@@ -2,7 +2,7 @@ package cn.rainbow.oxygen.module.modules.render
 
 import cn.rainbow.oxygen.event.Event
 import cn.rainbow.oxygen.event.EventTarget
-import cn.rainbow.oxygen.event.events.EventRender3D
+import cn.rainbow.oxygen.event.events.Render3DEvent
 import cn.rainbow.oxygen.module.Category
 import cn.rainbow.oxygen.module.Module
 import cn.rainbow.oxygen.module.setting.BooleanValue
@@ -27,9 +27,9 @@ class ChestESP : Module("ChestESP", Category.Render) {
         modeValue.addValue("Box")
     }
 
-    @EventTarget(events = [EventRender3D::class])
+    @EventTarget(events = [Render3DEvent::class])
     private fun onEvent(e: Event) {
-        if (e is EventRender3D) {
+        if (e is Render3DEvent) {
             for (tileEntity in mc.theWorld.loadedTileEntityList) {
                 if (tileEntity is TileEntityChest) {
                     if (modeValue.isCurrentMode("2D")) {

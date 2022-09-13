@@ -3,8 +3,8 @@ package cn.rainbow.oxygen.module.modules.combat;
 import cn.rainbow.oxygen.Oxygen;
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventPacket;
-import cn.rainbow.oxygen.event.events.EventUpdate;
+import cn.rainbow.oxygen.event.events.PacketEvent;
+import cn.rainbow.oxygen.event.events.UpdateEvent;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
 import cn.rainbow.oxygen.module.setting.BooleanValue;
@@ -54,11 +54,11 @@ public class AntiBot extends Module {
 		super.onDisable();
 	}
 
-	@EventTarget(events = {EventUpdate.class, EventPacket.class})
+	@EventTarget(events = {UpdateEvent.class, PacketEvent.class})
 	public void onPacket(Event e) {
-		if (e instanceof EventUpdate) {
+		if (e instanceof UpdateEvent) {
 			this.setDisplayName(mode.getCurrentValue());
-			if (this.mc.thePlayer == null) return;
+			if (this.mc.thePlayer == null || this.mc.theWorld == null) return;
 			if (mode.isCurrentMode("Hypixel")) {
 				for (EntityPlayer entity : mc.theWorld.playerEntities) {
 					if (entity != mc.thePlayer && entity != null) {
@@ -74,8 +74,8 @@ public class AntiBot extends Module {
 				}
 			}
 		}
-		if (e instanceof EventPacket){
-			EventPacket eventPacket = (EventPacket) e;
+		if (e instanceof PacketEvent) {
+			PacketEvent eventPacket = (PacketEvent) e;
 			if (mode.isCurrentMode("Test")) {
 				if (eventPacket.getPacket() instanceof S18PacketEntityTeleport) {
 					S18PacketEntityTeleport packet = (S18PacketEntityTeleport) eventPacket.getPacket();
@@ -88,7 +88,7 @@ public class AntiBot extends Module {
 				}
 			}
 			if (mode.isCurrentMode("HuaYuTing")) {
-				EventPacket ep = (EventPacket) e;
+				PacketEvent ep = (PacketEvent) e;
 				if (mc.thePlayer == null || mc.theWorld == null)
 					return;
 				final Packet<?> packet = ep.getPacket();

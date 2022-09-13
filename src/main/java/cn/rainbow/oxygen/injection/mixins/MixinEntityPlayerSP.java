@@ -3,16 +3,14 @@ package cn.rainbow.oxygen.injection.mixins;
 import java.util.List;
 
 import cn.rainbow.oxygen.Oxygen;
-import cn.rainbow.oxygen.command.CommandParser;
-import cn.rainbow.oxygen.command.logger.CMinecraftLogger;
-import cn.rainbow.oxygen.event.events.EventMotion;
-import cn.rainbow.oxygen.event.events.EventMove;
-import cn.rainbow.oxygen.event.events.EventStep;
-import cn.rainbow.oxygen.event.events.EventUpdate;
+import cn.rainbow.oxygen.command.sender.CommandSender;
+import cn.rainbow.oxygen.event.events.MotionEvent;
+import cn.rainbow.oxygen.event.events.MoveEvent;
+import cn.rainbow.oxygen.event.events.StepEvent;
+import cn.rainbow.oxygen.event.events.UpdateEvent;
 import cn.rainbow.oxygen.injection.interfaces.IEntity;
 import cn.rainbow.oxygen.module.modules.client.NoCommand;
 import cn.rainbow.oxygen.module.modules.movement.NoSlow;
-import cn.rainbow.oxygen.utils.rotation.RotationUtils;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.*;
@@ -108,7 +106,7 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
 
 	@Inject(method = "onUpdate", at = @At("HEAD"))
 	public void onUpdate(CallbackInfo callbackInfo) {
-		new EventUpdate().call();
+		new UpdateEvent().call();
 	}
 
 	/**
@@ -291,7 +289,7 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
 	@Overwrite
 	public void onUpdateWalkingPlayer() {
 
-		EventMotion pre = new EventMotion(EventMotion.MotionType.PRE, this.rotationYaw, this.rotationPitch, this.onGround,
+		MotionEvent pre = new MotionEvent(MotionEvent.MotionType.PRE, this.rotationYaw, this.rotationPitch, this.onGround,
 				this.posX, this.posY, this.posZ);
 		pre.call();
 
@@ -361,7 +359,7 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
 			}
 		}
 
-		EventMotion post = new EventMotion(EventMotion.MotionType.POST, this.rotationYaw, this.rotationPitch, this.onGround,
+		MotionEvent post = new MotionEvent(MotionEvent.MotionType.POST, this.rotationYaw, this.rotationPitch, this.onGround,
 				this.posX, this.posY, this.posZ);
 		post.call();
 	}
@@ -374,7 +372,7 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
 	@Overwrite
 	public void sendChatMessage(String message) {
 		if (message.startsWith(".") && !Oxygen.INSTANCE.moduleManager.getModule(NoCommand.class).getEnabled()) {
-			new CommandParser().run(message.substring(1), new CMinecraftLogger());
+			CommandSender.INSTANCE.forMinecraft(message.substring(1));
 			return;
 		}
 		this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));
@@ -387,7 +385,7 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
 
 	@Override
 	public void moveEntity(double x, double y, double z) {
-		final EventMove event = new EventMove(x, y, z);
+		final MoveEvent event = new MoveEvent(x, y, z);
 		event.call();
 		x = event.getX();
 		y = event.getY();
@@ -484,7 +482,7 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
 
 			this.setEntityBoundingBox(this.getEntityBoundingBox().offset(0.0D, 0.0D, z));
 
-			EventStep eventStep = new EventStep(true, this.stepHeight);
+			StepEvent eventStep = new StepEvent(true, this.stepHeight);
 			eventStep.call();
 			if (this.stepHeight > 0.0F && flag1 && (d3 != x || d5 != z)) {
 				
@@ -569,7 +567,7 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
 					this.setEntityBoundingBox(axisalignedbb3);
 				}
 				
-				EventStep eventStep2 = new EventStep(false, 1D + y);
+				StepEvent eventStep2 = new StepEvent(false, 1D + y);
 				eventStep2.call();
 			}
 
@@ -689,7 +687,7 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
         return Minecraft.getMinecraft().thePlayer.movementInput.moveForward > 0.0 | Minecraft.getMinecraft().thePlayer.movementInput.moveStrafe > 0.0;
     }
 
-	public void setMoveSpeed(final EventMove event, final double speed) {
+	public void setMoveSpeed(final MoveEvent event, final double speed) {
         double forward = Minecraft.getMinecraft().thePlayer.movementInput.moveForward;
         double strafe = Minecraft.getMinecraft().thePlayer.movementInput.moveStrafe;
         float yaw = this.rotationYaw;

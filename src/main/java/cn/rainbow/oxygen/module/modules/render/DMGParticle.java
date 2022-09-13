@@ -2,8 +2,8 @@ package cn.rainbow.oxygen.module.modules.render;
 
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventLivingUpdate;
-import cn.rainbow.oxygen.event.events.EventRender3D;
+import cn.rainbow.oxygen.event.events.LivingUpdateEvent;
+import cn.rainbow.oxygen.event.events.Render3DEvent;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
 import cn.rainbow.oxygen.utils.Location;
@@ -26,11 +26,11 @@ public class DMGParticle extends Module {
 		super("DMGParticle", Category.Render);
 	}
 
-	@EventTarget(events = { EventLivingUpdate.class, EventRender3D.class })
+	@EventTarget(events = { LivingUpdateEvent.class, Render3DEvent.class })
 	public void onLivingUpdate(Event event) {
 		
-		if (event instanceof EventLivingUpdate) {
-			EventLivingUpdate elu = (EventLivingUpdate) event;
+		if (event instanceof LivingUpdateEvent) {
+			LivingUpdateEvent elu = (LivingUpdateEvent) event;
 			
 			EntityLivingBase entity = (EntityLivingBase) elu.getEntity();
 			if (entity == this.mc.thePlayer) {
@@ -61,7 +61,7 @@ public class DMGParticle extends Module {
 			}
 		}
 		
-		if (event instanceof EventRender3D) {
+		if (event instanceof Render3DEvent) {
 			for (Particles update : this.particles) {
 				++update.ticks;
 				if (update.ticks <= 10) {

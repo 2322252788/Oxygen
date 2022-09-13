@@ -2,8 +2,8 @@ package cn.rainbow.oxygen.module.modules.render;
 
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventClickMouse;
-import cn.rainbow.oxygen.event.events.EventRender2D;
+import cn.rainbow.oxygen.event.events.ClickMouseEvent;
+import cn.rainbow.oxygen.event.events.Render2DEvent;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
 import cn.rainbow.oxygen.module.setting.BooleanValue;
@@ -46,10 +46,10 @@ public class KeyStrokes extends Module {
         this.movementKeys[4] = new Key(mc.gameSettings.keyBindJump, 2, 74);
 	}
 	
-	@EventTarget(events = {EventClickMouse.class, EventRender2D.class})
+	@EventTarget(events = {ClickMouseEvent.class, Render2DEvent.class})
     public void onMouse(Event event) {
-		if(event instanceof EventClickMouse) {
-			EventClickMouse ecm = (EventClickMouse) event;
+		if(event instanceof ClickMouseEvent) {
+			ClickMouseEvent ecm = (ClickMouseEvent) event;
 			 if (ecm.button == 0 && Mouse.getEventButtonState()) {
 		            this.mouseButtons[0].addClick();
 		        }
@@ -57,7 +57,7 @@ public class KeyStrokes extends Module {
 		            this.mouseButtons[1].addClick();
 		        }
 		}
-		if(event instanceof EventRender2D) {
+		if(event instanceof Render2DEvent) {
 			int x = (int) X.getCurrentValue();
 	        int y = (int)Y.getCurrentValue();
 	        int textColor = Color.WHITE.getRGB();

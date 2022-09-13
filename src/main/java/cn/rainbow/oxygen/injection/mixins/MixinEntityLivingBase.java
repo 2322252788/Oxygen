@@ -1,7 +1,7 @@
 package cn.rainbow.oxygen.injection.mixins;
 
-import cn.rainbow.oxygen.event.events.EventJump;
-import cn.rainbow.oxygen.event.events.EventLivingUpdate;
+import cn.rainbow.oxygen.event.events.JumpEvent;
+import cn.rainbow.oxygen.event.events.LivingUpdateEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -43,7 +43,7 @@ public abstract class MixinEntityLivingBase extends Entity {
      */
     @Overwrite
     protected void jump() {
-        final EventJump jumpEvent = new EventJump(this.getJumpUpwardsMotion());
+        final JumpEvent jumpEvent = new JumpEvent(this.getJumpUpwardsMotion());
         jumpEvent.call();
         if(jumpEvent.isCancelled())
             return;
@@ -64,7 +64,7 @@ public abstract class MixinEntityLivingBase extends Entity {
 
     @Inject(method = "onEntityUpdate", at = @At(value = "HEAD"))
     public void onEntityUpdate(CallbackInfo ci) {
-        EventLivingUpdate event = new EventLivingUpdate(this);
+        LivingUpdateEvent event = new LivingUpdateEvent(this);
         event.call();
     }
 	

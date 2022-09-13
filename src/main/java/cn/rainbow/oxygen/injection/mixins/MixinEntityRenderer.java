@@ -1,6 +1,6 @@
 package cn.rainbow.oxygen.injection.mixins;
 
-import cn.rainbow.oxygen.event.events.EventRender3D;
+import cn.rainbow.oxygen.event.events.Render3DEvent;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,7 +39,7 @@ public abstract class MixinEntityRenderer {
 
 	@Inject(method = "renderWorldPass", at = {@At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/GlStateManager;disableFog()V", shift = At.Shift.AFTER) })
 	private void eventRender3D(int pass, float partialTicks, long finishTimeNano, CallbackInfo callbackInfo) {
-		new EventRender3D(partialTicks).call();
+		new Render3DEvent(partialTicks).call();
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 	}
 

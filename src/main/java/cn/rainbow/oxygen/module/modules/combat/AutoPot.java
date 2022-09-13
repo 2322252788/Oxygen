@@ -2,8 +2,8 @@ package cn.rainbow.oxygen.module.modules.combat;
 
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventMotion;
-import cn.rainbow.oxygen.event.events.EventMove;
+import cn.rainbow.oxygen.event.events.MotionEvent;
+import cn.rainbow.oxygen.event.events.MoveEvent;
 import cn.rainbow.oxygen.event.events.TickEvent;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
@@ -47,23 +47,23 @@ public class AutoPot extends Module {
 
     private int lastPottedSlot;
 
-    @EventTarget(events = {EventMove.class, EventMotion.class, TickEvent.class})
+    @EventTarget(events = {MoveEvent.class, MotionEvent.class, TickEvent.class})
     private void onMove(final Event event) {
-        if (event instanceof EventMove) {
+        if (event instanceof MoveEvent) {
             if (this.jumping) {
                 this.mc.thePlayer.motionX = 0;
                 this.mc.thePlayer.motionZ = 0;
-                ((EventMove) event).setX(0);
-                ((EventMove) event).setZ(0);
+                ((MoveEvent) event).setX(0);
+                ((MoveEvent) event).setZ(0);
 
                 if (cooldown.hasPassed(100) && this.mc.thePlayer.onGround) {
                     this.jumping = false;
                 }
             }
         }
-        if (event instanceof EventMotion) {
-            EventMotion em = (EventMotion) event;
-            if (em.getMotionType() == EventMotion.MotionType.PRE) {
+        if (event instanceof MotionEvent) {
+            MotionEvent em = (MotionEvent) event;
+            if (em.getMotionType() == MotionEvent.MotionType.PRE) {
                 if (MoveUtils.getBlockUnderPlayer(mc.thePlayer, 0.01) instanceof BlockGlass || !MoveUtils.isOnGround(0.01))  {
                     timer.reset();
                     return;
@@ -88,7 +88,7 @@ public class AutoPot extends Module {
                 final int potSlot = this.getPotFromInventory();
                 if (potSlot != -1 && timer.hasPassed(delay.getCurrentValue())) {
                     if (jump.getCurrentValue() && !BlockUtils.isInLiquid()) {
-                        ((EventMotion) event).setPitch(-89.5f);
+                        ((MotionEvent) event).setPitch(-89.5f);
 
                         this.jumping = true;
                         if (this.mc.thePlayer.onGround) {
@@ -96,13 +96,13 @@ public class AutoPot extends Module {
                             cooldown.reset();
                         }
                     } else {
-                        ((EventMotion) event).setPitch(89.5f);
+                        ((MotionEvent) event).setPitch(89.5f);
                     }
 
                     rotated = true;
                 }
             }
-            if (em.getMotionType() == EventMotion.MotionType.POST) {
+            if (em.getMotionType() == MotionEvent.MotionType.POST) {
                 if (!rotated && !this.hvh.getCurrentValue())
                     return;
 

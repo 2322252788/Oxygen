@@ -6,12 +6,10 @@
 package cn.rainbow.oxygen.utils.rotation;
 
 import cn.rainbow.oxygen.event.Event;
-import cn.rainbow.oxygen.event.EventPriority;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventMotion;
-import cn.rainbow.oxygen.event.events.EventPacket;
+import cn.rainbow.oxygen.event.events.MotionEvent;
+import cn.rainbow.oxygen.event.events.PacketEvent;
 import cn.rainbow.oxygen.event.events.TickEvent;
-import cn.rainbow.oxygen.module.modules.combat.KillAura;
 import cn.rainbow.oxygen.utils.RaycastUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -477,7 +475,7 @@ public final class RotationUtils {
      *
      * @param event Tick event
      */
-    @EventTarget(events = {TickEvent.class, EventPacket.class, EventMotion.class})
+    @EventTarget(events = {TickEvent.class, PacketEvent.class, MotionEvent.class})
     public void onTick(final Event event) {
         if (event instanceof TickEvent) {
             if(targetRotation != null) {
@@ -495,8 +493,8 @@ public final class RotationUtils {
             if(random.nextGaussian() > 0.8D) y = Math.random();
             if(random.nextGaussian() > 0.8D) z = Math.random();
         }
-        if (event instanceof EventPacket) {
-            final Packet<?> packet = ((EventPacket) event).getPacket();
+        if (event instanceof PacketEvent) {
+            final Packet<?> packet = ((PacketEvent) event).getPacket();
 
             if(packet instanceof C03PacketPlayer) {
                 final C03PacketPlayer packetPlayer = (C03PacketPlayer) packet;
@@ -510,9 +508,9 @@ public final class RotationUtils {
                 if(packetPlayer.rotating) serverRotation = new Rotation(packetPlayer.yaw, packetPlayer.pitch);
             }
         }
-        if(event instanceof EventMotion) {
-            EventMotion em = (EventMotion)event;
-            if(em.getMotionType() == EventMotion.MotionType.PRE && targetRotation != null) {
+        if(event instanceof MotionEvent) {
+            MotionEvent em = (MotionEvent)event;
+            if(em.getMotionType() == MotionEvent.MotionType.PRE && targetRotation != null) {
                 em.setYaw(targetRotation.getYaw());
                 em.setPitch(targetRotation.getPitch());
             }

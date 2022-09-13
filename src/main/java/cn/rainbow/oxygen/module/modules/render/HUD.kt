@@ -4,7 +4,7 @@ import by.radioegor146.nativeobfuscator.Native
 import cn.rainbow.oxygen.Oxygen
 import cn.rainbow.oxygen.event.Event
 import cn.rainbow.oxygen.event.EventTarget
-import cn.rainbow.oxygen.event.events.EventRender2D
+import cn.rainbow.oxygen.event.events.Render2DEvent
 import cn.rainbow.oxygen.module.Category.Client
 import cn.rainbow.oxygen.module.Category.Render
 import cn.rainbow.oxygen.module.Module
@@ -12,7 +12,6 @@ import cn.rainbow.oxygen.module.setting.BooleanValue
 import cn.rainbow.oxygen.module.setting.ModeValue
 import cn.rainbow.oxygen.utils.render.BlurBuffer
 import cn.rainbow.oxygen.utils.render.ColorUtils
-import cn.rainbow.oxygen.utils.render.GuiRenderUtils
 import cn.rainbow.oxygen.utils.render.RenderUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.FontRenderer
@@ -33,9 +32,9 @@ class HUD: Module("HUD", Render) {
     val chatAnim = BooleanValue("ChatAnimation", true)
     val chatRect = BooleanValue("ChatRect", false)
 
-    @EventTarget(events = [EventRender2D::class])
+    @EventTarget(events = [Render2DEvent::class])
     private fun onEvent(event: Event) {
-        if (event is EventRender2D && !this.mc.gameSettings.showDebugInfo) {
+        if (event is Render2DEvent && !this.mc.gameSettings.showDebugInfo) {
             val sr = event.sr
             val x = mc.thePlayer.posX
             val y = mc.thePlayer.posY
@@ -50,8 +49,7 @@ class HUD: Module("HUD", Render) {
                         BlurBuffer.blurArea(3F, 3F, 98F, 66F, true)
                     }
                 } else if (logoMode.isCurrentMode("Classic")) {
-                    GuiRenderUtils.drawRoundedRect(3F, 3F, 98F, 66F, 3F,
-                        Color(255, 255, 255, 120).rgb, 1F, Color(255, 255, 255, 120).rgb)
+                    RenderUtil.drawRoundedRect2(3F, 3F, 101F, 68F, Color(255, 255, 255, 120).rgb, Color(255, 255, 255, 120).rgb)
                 }
                 val logoColor = if (logoMode.isCurrentMode("Blur"))
                     RenderUtil.reAlpha(ColorUtils.WHITE.c, 0.75f)

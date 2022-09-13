@@ -1,7 +1,7 @@
 package cn.rainbow.oxygen.injection.mixins;
 
 import cn.rainbow.oxygen.Oxygen;
-import cn.rainbow.oxygen.event.events.EventAttack;
+import cn.rainbow.oxygen.event.events.AttackEvent;
 import cn.rainbow.oxygen.module.modules.combat.Reach;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.entity.Entity;
@@ -22,7 +22,7 @@ public class MixinPlayerControllerMP {
 
     @Inject(method = "attackEntity",at = @At("HEAD"))
     private void attackEntity(EntityPlayer p_attackEntity_1_, Entity p_attackEntity_2_, CallbackInfo ci) {
-        new EventAttack(p_attackEntity_2_).call();
+        new AttackEvent(p_attackEntity_2_).call();
     }
 
     @Inject(method = "getBlockReachDistance", at = @At("HEAD"), cancellable = true)

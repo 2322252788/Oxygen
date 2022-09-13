@@ -2,7 +2,7 @@ package cn.rainbow.oxygen.module.modules.player;
 
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventUpdate;
+import cn.rainbow.oxygen.event.events.UpdateEvent;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
 import cn.rainbow.oxygen.module.setting.BooleanValue;
@@ -33,9 +33,9 @@ public class AutoArmor extends Module {
 		return !timer.isDelayComplete(200);
 	}
 
-	@EventTarget(events = EventUpdate.class)
+	@EventTarget(events = UpdateEvent.class)
 	public void onTick(Event event) {
-		if (event instanceof EventUpdate) {
+		if (event instanceof UpdateEvent) {
 			if (mc.thePlayer == null) return;
 			if (checkInv.getCurrentValue()) {
 				if (!(mc.currentScreen instanceof GuiInventory))

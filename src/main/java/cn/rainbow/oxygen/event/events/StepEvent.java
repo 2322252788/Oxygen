@@ -2,13 +2,13 @@ package cn.rainbow.oxygen.event.events;
 
 import cn.rainbow.oxygen.event.Event;
 
-public class EventStep extends Event {
+public class StepEvent extends Event {
 	private double stepHeight;
 	private double realHeight;
 	private boolean active;
 	private final boolean pre;
 
-	public EventStep(boolean state, double stepHeight) {
+	public StepEvent(boolean state, double stepHeight) {
 		this.pre = state;
 		this.realHeight = stepHeight;
 		this.stepHeight = stepHeight;

@@ -2,15 +2,15 @@ package cn.rainbow.oxygen.module.modules.player
 
 import cn.rainbow.oxygen.event.Event
 import cn.rainbow.oxygen.event.EventTarget
-import cn.rainbow.oxygen.event.events.EventUpdate
+import cn.rainbow.oxygen.event.events.UpdateEvent
 import cn.rainbow.oxygen.module.Category
 import cn.rainbow.oxygen.module.Module
 import net.minecraft.util.BlockPos
 
 class AutoTool : Module("AutoTool", Category.Player) {
-    @EventTarget(events = [EventUpdate::class])
+    @EventTarget(events = [UpdateEvent::class])
     private fun onEvent(event: Event) {
-        if (event is EventUpdate) {
+        if (event is UpdateEvent) {
             if (mc.gameSettings.keyBindAttack.isKeyDown && mc.objectMouseOver != null) {
                 val pos = mc.objectMouseOver.blockPos ?: return
                 updateTool(pos)

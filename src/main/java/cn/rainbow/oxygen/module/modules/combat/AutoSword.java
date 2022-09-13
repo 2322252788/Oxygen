@@ -2,7 +2,7 @@ package cn.rainbow.oxygen.module.modules.combat;
 
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventUpdate;
+import cn.rainbow.oxygen.event.events.UpdateEvent;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
 import cn.rainbow.oxygen.module.setting.BooleanValue;
@@ -23,9 +23,9 @@ extends Module {
         super("AutoSword", Category.Combat);
     }
 
-    @EventTarget(events = EventUpdate.class)
-    public void onTick(Event event){
-        if (event instanceof EventUpdate) {
+    @EventTarget(events = UpdateEvent.class)
+    public void onTick(Event event) {
+        if (event instanceof UpdateEvent) {
 
             if (this.mc.thePlayer == null)
                 return;

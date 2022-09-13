@@ -52,7 +52,7 @@ class CommandManager {
             event.setCancelled(true)
             when (event.messageType) {
                 CommandEvent.MessageType.Normal -> {
-                    service.execute(Thread { CommandSender.send(event.command) })
+                    service.execute(Thread { CommandSender.forMinecraft(event.command) })
                 }
                 CommandEvent.MessageType.Other -> {
                     service.execute(Thread { CommandSender.send(event.command, event.commandLogger) })

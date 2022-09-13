@@ -5,9 +5,9 @@ import java.awt.Color;
 import cn.rainbow.oxygen.Oxygen;
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventMotion;
-import cn.rainbow.oxygen.event.events.EventMove;
-import cn.rainbow.oxygen.event.events.EventRender3D;
+import cn.rainbow.oxygen.event.events.MotionEvent;
+import cn.rainbow.oxygen.event.events.MoveEvent;
+import cn.rainbow.oxygen.event.events.Render3DEvent;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
 import cn.rainbow.oxygen.module.modules.combat.KillAura;
@@ -38,7 +38,7 @@ public class TargetStrafe extends Module {
 		}
 	}
 
-	public final boolean doStrafeAtSpeed(EventMove event, double moveSpeed) {
+	public final boolean doStrafeAtSpeed(MoveEvent event, double moveSpeed) {
 		boolean strafe = this.canStrafe();
 		if (strafe) {
 			float[] rotations = getRotations(KillAura.getTarget());
@@ -52,18 +52,18 @@ public class TargetStrafe extends Module {
 		return strafe;
 	}
 
-	@EventTarget(events = {EventMotion.class, EventRender3D.class})
+	@EventTarget(events = {MotionEvent.class, Render3DEvent.class})
 	private void onUpdate(Event event) {
-		if (event instanceof EventMotion) {
-			EventMotion em = (EventMotion) event;
-			if (em.getMotionType() == EventMotion.MotionType.PRE) {
+		if (event instanceof MotionEvent) {
+			MotionEvent em = (MotionEvent) event;
+			if (em.getMotionType() == MotionEvent.MotionType.PRE) {
 				if (mc.thePlayer.isCollidedHorizontally) {
 					this.switchDirection();
 				}
 			}
 		}
-		if (event instanceof EventRender3D) {
-			EventRender3D er3 = (EventRender3D) event;
+		if (event instanceof Render3DEvent) {
+			Render3DEvent er3 = (Render3DEvent) event;
 			if (ESP.getCurrentValue()) {
 				for (Entity entity : mc.theWorld.getLoadedEntityList()) {
 					if (this.Check(entity) && entity == KillAura.getTarget()) {
@@ -74,7 +74,7 @@ public class TargetStrafe extends Module {
 		}
 	}
 
-	public static void setSpeed(EventMove moveEvent, double moveSpeed, float pseudoYaw, double pseudoStrafe, double pseudoForward) {
+	public static void setSpeed(MoveEvent moveEvent, double moveSpeed, float pseudoYaw, double pseudoStrafe, double pseudoForward) {
 		double forward = pseudoForward;
 		double strafe = pseudoStrafe;
 		float yaw = pseudoYaw;

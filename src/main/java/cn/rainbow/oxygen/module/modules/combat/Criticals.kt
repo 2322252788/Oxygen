@@ -3,7 +3,7 @@ package cn.rainbow.oxygen.module.modules.combat
 import cn.rainbow.oxygen.Oxygen
 import cn.rainbow.oxygen.event.Event
 import cn.rainbow.oxygen.event.EventTarget
-import cn.rainbow.oxygen.event.events.EventPacket
+import cn.rainbow.oxygen.event.events.PacketEvent
 import cn.rainbow.oxygen.module.Category
 import cn.rainbow.oxygen.module.Module
 import cn.rainbow.oxygen.module.modules.movement.Speed
@@ -38,9 +38,9 @@ class Criticals : Module("Criticals", Category.Combat) {
         get() = mc.thePlayer.isUsingItem && mc.thePlayer.itemInUse.item
             .getItemUseAction(mc.thePlayer.itemInUse) == EnumAction.EAT
 
-    @EventTarget(events = [EventPacket::class])
+    @EventTarget(events = [PacketEvent::class])
     fun onEvent(event: Event) {
-        if (event is EventPacket) {
+        if (event is PacketEvent) {
             val packet = event.getPacket()
             if (packet is C03PacketPlayer) {
                 lY = packet.positionY

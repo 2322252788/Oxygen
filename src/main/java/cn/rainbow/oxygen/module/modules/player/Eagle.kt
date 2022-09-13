@@ -4,7 +4,7 @@ import cn.rainbow.oxygen.event.Event
 import cn.rainbow.oxygen.event.EventTarget
 import net.minecraft.util.BlockPos
 import net.minecraft.entity.player.EntityPlayer
-import cn.rainbow.oxygen.event.events.EventUpdate
+import cn.rainbow.oxygen.event.events.UpdateEvent
 import cn.rainbow.oxygen.module.Category
 import cn.rainbow.oxygen.module.Module
 import net.minecraft.block.Block
@@ -20,9 +20,9 @@ class Eagle : Module("Eagle", Category.Player) {
         return getBlock(BlockPos(player.posX, player.posY - 1.0, player.posZ))
     }
 
-    @EventTarget(events = [EventUpdate::class])
+    @EventTarget(events = [UpdateEvent::class])
     fun onUpdate(event: Event) {
-        if (event is EventUpdate) {
+        if (event is UpdateEvent) {
             if (getBlockUnderPlayer(mc.thePlayer) is BlockAir) {
                 if (mc.thePlayer.onGround) {
                     KeyBinding.setKeyBindState(mc.gameSettings.keyBindSneak.keyCode, true)

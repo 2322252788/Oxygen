@@ -3,12 +3,12 @@ package cn.rainbow.oxygen.event.events;
 import cn.rainbow.oxygen.event.Event;
 import net.minecraft.network.Packet;
 
-public class EventPacket extends Event {
+public class PacketEvent extends Event {
 	private boolean cancelled;
 	public Packet<?> packet;
 	private PacketType type;
 
-	public EventPacket(Packet<?> packet, PacketType type) {
+	public PacketEvent(Packet<?> packet, PacketType type) {
 		this.type = type;
 		this.packet = packet;
 		this.cancelled = false;

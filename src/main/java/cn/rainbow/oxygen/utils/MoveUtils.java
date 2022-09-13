@@ -1,6 +1,6 @@
 package cn.rainbow.oxygen.utils;
 
-import cn.rainbow.oxygen.event.events.EventMove;
+import cn.rainbow.oxygen.event.events.MoveEvent;
 import net.minecraft.block.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -92,7 +92,7 @@ public class MoveUtils {
         strafe(getSpeed());
     }
 
-    public static void strafe(EventMove e) {
+    public static void strafe(MoveEvent e) {
         strafe(e , getSpeed());
     }
 
@@ -105,7 +105,7 @@ public class MoveUtils {
         mc.thePlayer.motionZ = Math.cos(yaw) * d;
     }
 
-    public static void strafe(EventMove e , final double d) {
+    public static void strafe(MoveEvent e , final double d) {
         if (!isMoving())
             return;
 
@@ -283,7 +283,7 @@ public class MoveUtils {
         setMotion(speed, mc.thePlayer.rotationYaw);
     }
 
-    public static void setMotion(EventMove e, double speed, float yaw) {
+    public static void setMotion(MoveEvent e, double speed, float yaw) {
         double forward = mc.thePlayer.movementInput.moveForward;
         double strafe = mc.thePlayer.movementInput.moveStrafe;
         if ((forward == 0.0D) && (strafe == 0.0D)) {
@@ -312,7 +312,7 @@ public class MoveUtils {
         }
     }
 
-    public static void setMotion(EventMove e, double speed) {
+    public static void setMotion(MoveEvent e, double speed) {
         setMotion(e, speed, mc.thePlayer.rotationYaw);
     }
 

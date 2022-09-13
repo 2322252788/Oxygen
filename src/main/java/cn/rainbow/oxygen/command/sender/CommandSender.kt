@@ -2,10 +2,15 @@ package cn.rainbow.oxygen.command.sender
 
 import cn.rainbow.oxygen.command.logger.ConsoleCommandLogger
 import cn.rainbow.oxygen.Oxygen
+import cn.rainbow.oxygen.command.logger.CMinecraftLogger
 import cn.rainbow.oxygen.command.logger.CommandLogger
 
 object CommandSender {
-    fun send(command: String) {
+
+    fun forMinecraft(command: String) {
+        Oxygen.INSTANCE.commandManager.parser.run(command, CMinecraftLogger())
+    }
+    fun forCmd(command: String) {
         Oxygen.INSTANCE.commandManager.parser.run(command, ConsoleCommandLogger.COMMAND_LOGGER)
     }
 

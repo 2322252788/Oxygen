@@ -2,7 +2,7 @@ package cn.rainbow.oxygen.injection.mixins;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import cn.rainbow.oxygen.event.events.EventPacket;
+import cn.rainbow.oxygen.event.events.PacketEvent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,7 +24,7 @@ public class MixinNetworkManager {
 	
 	@Inject(method = { "sendPacket(Lnet/minecraft/network/Packet;)V" }, at = { @At("HEAD") }, cancellable = true)
     private void sendPacket(Packet packetIn, CallbackInfo ci) {
-        final EventPacket send = new EventPacket(packetIn, EventPacket.PacketType.Send);
+        final PacketEvent send = new PacketEvent(packetIn, PacketEvent.PacketType.Send);
         send.call();
         if (send.isCancelled()) {
             ci.cancel();
@@ -33,7 +33,7 @@ public class MixinNetworkManager {
 
     @Inject(method = { "channelRead0" }, at = { @At(value = "INVOKE", target = "Lnet/minecraft/network/Packet;processPacket(Lnet/minecraft/network/INetHandler;)V", shift = At.Shift.BEFORE) }, cancellable = true)
     private void packetReceived(ChannelHandlerContext p_channelRead0_1_, Packet packet, CallbackInfo ci) {
-        final EventPacket recieve = new EventPacket(packet, EventPacket.PacketType.Recieve);
+        final PacketEvent recieve = new PacketEvent(packet, PacketEvent.PacketType.Recieve);
         recieve.call();
         if (recieve.isCancelled()) {
             ci.cancel();

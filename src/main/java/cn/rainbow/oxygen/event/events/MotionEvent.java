@@ -2,7 +2,7 @@ package cn.rainbow.oxygen.event.events;
 
 import cn.rainbow.oxygen.event.Event;
 
-public class EventMotion extends Event {
+public class MotionEvent extends Event {
 	
 	public final MotionType type;
     public float yaw;
@@ -10,7 +10,7 @@ public class EventMotion extends Event {
     private boolean onGround;
     private double x, y, z;
 
-    public EventMotion(MotionType eventType, float yaw, float pitch, boolean onGround, double x, double y, double z) {
+    public MotionEvent(MotionType eventType, float yaw, float pitch, boolean onGround, double x, double y, double z) {
     	this.type = eventType;
         this.yaw = yaw;
         this.pitch = pitch;

@@ -5,7 +5,7 @@
  */
 package cn.rainbow.oxygen.utils.rotation
 
-import cn.rainbow.oxygen.event.events.EventStrafe
+import cn.rainbow.oxygen.event.events.StrafeEvent
 import cn.rainbow.oxygen.module.modules.client.Rotations
 import cn.rainbow.oxygen.utils.block.PlaceInfo
 import net.minecraft.client.Minecraft
@@ -71,7 +71,7 @@ data class Rotation(var yaw: Float, var pitch: Float) {
      *
      * @author bestnub
      */
-    fun applyStrafeToPlayer(event: EventStrafe) {
+    fun applyStrafeToPlayer(event: StrafeEvent) {
         val player = mc.thePlayer
         val dif = ((MathHelper.wrapAngleTo180_float(player.rotationYaw - this.yaw -
                 23.5f - 135) +

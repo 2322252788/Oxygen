@@ -1,6 +1,6 @@
 package cn.rainbow.oxygen.utils.render;
 
-import cn.rainbow.oxygen.event.events.EventRender3D;
+import cn.rainbow.oxygen.event.events.Render3DEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
@@ -745,7 +745,7 @@ public class RenderUtil {
         GL11.glColor4f(1, 1, 1, 1);
     }
 
-    public static void entityESPBox(Entity e, Color color, EventRender3D event) {
+    public static void entityESPBox(Entity e, Color color, Render3DEvent event) {
         double posX = e.lastTickPosX + (e.posX - e.lastTickPosX) * (double)event.getPartialTicks() - Minecraft.getMinecraft().getRenderManager().viewerPosX;
         double posY = e.lastTickPosY + (e.posY - e.lastTickPosY) * (double)event.getPartialTicks() - Minecraft.getMinecraft().getRenderManager().viewerPosY;
         double posZ = e.lastTickPosZ + (e.posZ - e.lastTickPosZ) * (double)event.getPartialTicks() - Minecraft.getMinecraft().getRenderManager().viewerPosZ;
@@ -872,5 +872,59 @@ public class RenderUtil {
     public static int rainbow(int delay) {
         double rainbow = Math.ceil((double)(System.currentTimeMillis() + (long)delay) / 10.0);
         return Color.getHSBColor((float)((rainbow %= 360.0) / 360.0), 0.5f, 1.0f).getRGB();
+    }
+
+    public static void drawHLine(float x, float y, float x1, int y1) {
+        if (y < x) {
+            float var5 = x;
+            x = y;
+            y = var5;
+        }
+        RenderUtil.drawRect(x, x1, y + 1.0F, x1 + 1.0F, y1);
+    }
+
+    public static void drawVLine(float x, float y, float x1, int y1) {
+        if (x1 < y) {
+            float var5 = y;
+            y = x1;
+            x1 = var5;
+        }
+        RenderUtil.drawRect(x, y + 1.0F, x + 1.0F, x1, y1);
+    }
+
+    public static void enableGL2D() {
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glDepthMask(true);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glHint(GL11.GL_LINE_SMOOTH_HINT, GL11.GL_NICEST);
+        GL11.glHint(GL11.GL_POLYGON_SMOOTH_HINT, GL11.GL_NICEST);
+    }
+
+    public static void disableGL2D() {
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GL11.glHint(GL11.GL_LINE_SMOOTH_HINT, GL11.GL_DONT_CARE);
+        GL11.glHint(GL11.GL_POLYGON_SMOOTH_HINT, GL11.GL_DONT_CARE);
+    }
+
+    public static void drawRoundedRect2(float var0, float var1, float var2, float var3, int var4, int var5) {
+        enableGL2D();
+        GL11.glScalef(0.5F, 0.5F, 0.5F);
+        drawVLine(var0 *= 2.0F, (var1 *= 2.0F) + 1.0F, (var3 *= 2.0F) - 2.0F, var4);
+        drawVLine((var2 *= 2.0F) - 1.0F, var1 + 1.0F, var3 - 2.0F, var4);
+        drawHLine(var0 + 2.0F, var2 - 3.0F, var1, var4);
+        drawHLine(var0 + 2.0F, var2 - 3.0F, var3 - 1.0F, var4);
+        drawHLine(var0 + 1.0F, var0 + 1.0F, var1 + 1.0F, var4);
+        drawHLine(var2 - 2.0F, var2 - 2.0F, var1 + 1.0F, var4);
+        drawHLine(var2 - 2.0F, var2 - 2.0F, var3 - 2.0F, var4);
+        drawHLine(var0 + 1.0F, var0 + 1.0F, var3 - 2.0F, var4);
+        RenderUtil.drawRect(var0 + 1.0F, var1 + 1.0F, var2 - 1.0F, var3 - 1.0F, var5);
+        GL11.glScalef(2.0F, 2.0F, 2.0F);
+        disableGL2D();
     }
 }

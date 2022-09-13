@@ -3,8 +3,8 @@ package cn.rainbow.oxygen.module.modules.movement;
 import cn.rainbow.oxygen.Oxygen;
 import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
-import cn.rainbow.oxygen.event.events.EventMotion;
-import cn.rainbow.oxygen.event.events.EventMove;
+import cn.rainbow.oxygen.event.events.MotionEvent;
+import cn.rainbow.oxygen.event.events.MoveEvent;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
 import cn.rainbow.oxygen.module.setting.ModeValue;
@@ -42,11 +42,11 @@ public class Speed extends Module {
         this.moveSpeed = getBaseMoveSpeed();
     }
 
-    @EventTarget(events = {EventMotion.class, EventMove.class})
+    @EventTarget(events = {MotionEvent.class, MoveEvent.class})
     public void onEvent(Event event) {
-        if (event instanceof EventMotion) {
-            EventMotion em = (EventMotion) event;
-            if (em.getMotionType() == EventMotion.MotionType.POST) {
+        if (event instanceof MotionEvent) {
+            MotionEvent em = (MotionEvent) event;
+            if (em.getMotionType() == MotionEvent.MotionType.POST) {
                 if (this.mc.thePlayer.isInWater() || this.mc.thePlayer.isInLava()) {
                     mc.timer.timerSpeed = 1.0F;
                     this.lastDist = 0.0D;
@@ -58,8 +58,8 @@ public class Speed extends Module {
                 this.lastDist = Math.sqrt(movementInput * movementInput + strafe * strafe);
             }
         }
-        if (event instanceof EventMove) {
-            EventMove emm = (EventMove) event;
+        if (event instanceof MoveEvent) {
+            MoveEvent emm = (MoveEvent) event;
             if (modeValue.isCurrentMode("NCPBhop")) {
                 if (this.mc.thePlayer.isInWater() || this.mc.thePlayer.isInLava() || this.mc.thePlayer.capabilities.isFlying) {
                     mc.timer.timerSpeed = 1;
@@ -111,7 +111,7 @@ public class Speed extends Module {
         }
     }
 
-    public void setMoveSpeed(final EventMove event, final double speed) {
+    public void setMoveSpeed(final MoveEvent event, final double speed) {
         double forward = mc.thePlayer.moveForward;
         double strafe = mc.thePlayer.moveStrafing;
         float yaw = mc.thePlayer.rotationYaw;

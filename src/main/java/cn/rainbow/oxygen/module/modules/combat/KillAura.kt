@@ -3,7 +3,7 @@ package cn.rainbow.oxygen.module.modules.combat
 import cn.rainbow.oxygen.event.Event
 import cn.rainbow.oxygen.event.EventTarget
 import cn.rainbow.oxygen.event.events.*
-import cn.rainbow.oxygen.event.events.EventMotion.MotionType
+import cn.rainbow.oxygen.event.events.MotionEvent.MotionType
 import cn.rainbow.oxygen.module.Category
 import cn.rainbow.oxygen.module.Module
 import cn.rainbow.oxygen.module.setting.BooleanValue
@@ -73,9 +73,9 @@ class KillAura: Module("KillAura", Category.Combat) {
         super.onDisable()
     }
 
-    @EventTarget(events = [EventMotion::class, EventRender3D::class, EventRender2D::class, EventWorldChange::class])
+    @EventTarget(events = [MotionEvent::class, Render3DEvent::class, Render2DEvent::class, WorldChangeEvent::class])
     fun onEvent(event: Event) {
-        if (event is EventMotion) {
+        if (event is MotionEvent) {
             this.displayName = this.mode.currentValue
             if (event.motionType.equals(MotionType.PRE)) {
 
@@ -131,12 +131,12 @@ class KillAura: Module("KillAura", Category.Combat) {
                 }
             }
         }
-        if (event is EventWorldChange) {
+        if (event is WorldChangeEvent) {
             if (this.autoDisable.currentValue) {
                 enabled = false
             }
         }
-        if (event is EventRender2D) {
+        if (event is Render2DEvent) {
             val sr = ScaledResolution(mc)
             val font2 = mc.fontRendererObj
             if (target != null && targetHud.currentValue) {
@@ -170,7 +170,7 @@ class KillAura: Module("KillAura", Category.Combat) {
                 }
             }
         }
-        if (event is EventRender3D) {
+        if (event is Render3DEvent) {
             if (target != null && targetHud.currentValue) {
                 if(target!!.isDead) {
                     return
@@ -291,7 +291,7 @@ class KillAura: Module("KillAura", Category.Combat) {
 
     private fun attackEntity(entity: EntityLivingBase) {
         mc.thePlayer.swingItem()
-        EventAttack(entity).call()
+        AttackEvent(entity).call()
         mc.thePlayer.sendQueue.addToSendQueue(C02PacketUseEntity(entity, C02PacketUseEntity.Action.ATTACK))
     }
 
