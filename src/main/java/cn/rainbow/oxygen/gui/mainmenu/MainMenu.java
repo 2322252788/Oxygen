@@ -2,8 +2,7 @@ package cn.rainbow.oxygen.gui.mainmenu;
 
 import by.radioegor146.nativeobfuscator.Native;
 import cn.rainbow.oxygen.Oxygen;
-import cn.rainbow.oxygen.gui.GuiLogin;
-import cn.rainbow.oxygen.gui.font.UnicodeFontRenderer;
+import cn.rainbow.oxygen.gui.font.CFontRenderer;
 
 import cn.rainbow.oxygen.utils.render.ColorUtils;
 import cn.rainbow.oxygen.utils.render.GuiRenderUtils;
@@ -20,7 +19,6 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.io.IOException;
-import java.lang.reflect.Field;
 
 @Native
 public class MainMenu
@@ -33,8 +31,8 @@ implements GuiYesNoCallback {
     public static int anExit = 0;
     public static int anMenu = 0;
     public static int anSingle = 0;
-    public UnicodeFontRenderer clientFont = Oxygen.INSTANCE.getFontmanager().wqy22;
-    public UnicodeFontRenderer clientFont2 = Oxygen.INSTANCE.getFontmanager().wqy17;
+    public CFontRenderer clientFont = Oxygen.INSTANCE.getFontmanager().wqy22;
+    public CFontRenderer clientFont2 = Oxygen.INSTANCE.getFontmanager().wqy17;
     public static int anMulti = 0;
     public static int anPlayerLoader = 0;
     public static boolean playHovered;
@@ -124,7 +122,7 @@ implements GuiYesNoCallback {
         }
         Oxygen.INSTANCE.getFontmanager().wqy14.drawString("Version - " + Oxygen.version, width - this.clientFont.getStringWidth("Version - " +  Oxygen.version) + 31, ((height + (height - 25)) / 2 - 8), Color.white.getRGB());
         String mcVer = "Minecraft(Forge) 1.8.9";
-        Oxygen.INSTANCE.getFontmanager().wqy14.drawString(mcVer, width - this.clientFont.getStringWidth(mcVer) + 36, (int) ((height + (height - 25)) / 2 + 1), Color.white.getRGB());
+        Oxygen.INSTANCE.getFontmanager().wqy14.drawString(mcVer, width - this.clientFont.getStringWidth(mcVer) + 34, (height + (height - 25)) / 2 + 1, Color.white.getRGB());
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         RenderUtil.drawIcon((float)(108 - anModule / 2), (float)((height - 25 + (height - 17)) / 2 - anModule), 17 + anModule, 17 + anModule, Resource.getModuleImg());
         RenderUtil.drawIcon((float)(78 - anAlt / 2), (float)((height - 25 + (height - 17)) / 2 - anAlt), 13 + anAlt, 17 + anAlt, Resource.getAlt());

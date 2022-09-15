@@ -367,43 +367,22 @@ public class RenderUtil {
         GL11.glPopMatrix();
     }
 
-    public static void drawCircle(double x, double y, double radius, int color) {
-        float alpha = (float) (color >> 24 & 255) / 255.0f;
-        float red = (float) (color >> 16 & 255) / 255.0f;
-        float green = (float) (color >> 8 & 255) / 255.0f;
-        float blue = (float) (color & 255) / 255.0f;
-        boolean blend = GL11.glIsEnabled(3042);
-        boolean line = GL11.glIsEnabled(2848);
-        boolean texture = GL11.glIsEnabled(3553);
-        if (!blend) {
-            GL11.glEnable(3042);
-        }
-        if (!line) {
-            GL11.glEnable(2848);
-        }
-        if (texture) {
-            GL11.glDisable(3553);
-        }
-        GL11.glBlendFunc(770, 771);
-        GL11.glColor4f(red, green, blue, alpha);
-        GL11.glBegin(9);
-        int i = 0;
-        while (i <= 360) {
-            GL11.glVertex2d(
-                    x + Math.sin((double) i * 3.141526 / 180.0) * radius,
-                    y + Math.cos((double) i * 3.141526 / 180.0) * radius);
-            ++i;
+    public static void drawCircle(float x, float y, float radius, int color) {
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_POLYGON_SMOOTH);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        color(color);
+        GL11.glBegin(GL11.GL_POLYGON);
+        for (int i = 0; i <= 360; i++) {
+            double x2 = Math.sin(((i * Math.PI) / 180)) * radius;
+            double y2 = Math.cos(((i * Math.PI) / 180)) * radius;
+            GL11.glVertex3d(x + x2, y + y2, 0);
         }
         GL11.glEnd();
-        if (texture) {
-            GL11.glEnable(3553);
-        }
-        if (!line) {
-            GL11.glDisable(2848);
-        }
-        if (!blend) {
-            GL11.glDisable(3042);
-        }
+        GL11.glDisable(GL11.GL_POLYGON_SMOOTH);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_BLEND);
     }
 
     public static void drawOutRoundRectLine(double left, double top, double right, double bottom, int raiius, float linewidth, int color) {
@@ -441,6 +420,7 @@ public class RenderUtil {
         GL11.glEnd();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glColor4f(1, 1, 1, 1);
+        GlStateManager.disableBlend();
     }
 
     public static void doGlScissor(float x, float y, float windowWidth2, float windowHeight2) {

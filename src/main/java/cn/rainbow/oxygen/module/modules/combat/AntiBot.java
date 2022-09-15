@@ -60,12 +60,13 @@ public class AntiBot extends Module {
 			this.setDisplayName(mode.getCurrentValue());
 			if (this.mc.thePlayer == null || this.mc.theWorld == null) return;
 			if (mode.isCurrentMode("Hypixel")) {
-				try {
-					for (EntityPlayer entity : mc.theWorld.playerEntities) {
-						if (entity != mc.thePlayer && entity != null) {
+				if (!mc.theWorld.loadedEntityList.isEmpty()) {
+					for (Entity entity : mc.theWorld.loadedEntityList) {
+						if (entity instanceof EntityPlayer && entity != mc.thePlayer) {
+							String displayName = entity.getDisplayName().getFormattedText();
 							if (!getTabPlayerList().contains(entity)
-									&& !entity.getDisplayName().getFormattedText().toLowerCase().contains("[npc")
-									&& entity.getDisplayName().getFormattedText().startsWith("\u00a7")
+									&& !displayName.toLowerCase().contains("[npc")
+									&& displayName.startsWith("\u00a7")
 									&& entity.isEntityAlive()) {
 								if (!isHypixelNPC(entity) & entity.isInvisible()) {
 									mc.theWorld.removeEntity(entity);
@@ -73,7 +74,7 @@ public class AntiBot extends Module {
 							}
 						}
 					}
-				} catch (Exception ignored) {}
+				}
 			}
 		}
 		if (e instanceof PacketEvent) {

@@ -13,8 +13,7 @@ import cn.rainbow.oxygen.event.Event;
 import cn.rainbow.oxygen.event.EventTarget;
 import cn.rainbow.oxygen.event.events.Render2DEvent;
 import cn.rainbow.oxygen.event.events.Render3DEvent;
-import cn.rainbow.oxygen.gui.font.cfont.CFontRenderer;
-import cn.rainbow.oxygen.gui.font.UnicodeFontRenderer;
+import cn.rainbow.oxygen.gui.font.CFontRenderer;
 import cn.rainbow.oxygen.module.Category;
 import cn.rainbow.oxygen.module.Module;
 import cn.rainbow.oxygen.module.modules.combat.AntiBot;
@@ -159,14 +158,14 @@ public class Nametags extends Module {
                                         stack);
                                 int kLevel = EnchantmentHelper.getEnchantmentLevel(Enchantment.knockback.effectId,
                                         stack);
-                                UnicodeFontRenderer c10 = Oxygen.INSTANCE.fontmanager.comfortaa10;
+                                CFontRenderer c10 = Oxygen.INSTANCE.fontmanager.comfortaa10;
                                 if (sLevel > 0) {
                                     drawEnchantTag("Sh" + getColor(sLevel) + sLevel, x, y);
-                                    y += c10.FONT_HEIGHT - 2;
+                                    y += c10.getHeight() - 2;
                                 }
                                 if (fLevel > 0) {
                                     drawEnchantTag("Fir" + getColor(fLevel) + fLevel, x, y);
-                                    y += c10.FONT_HEIGHT - 2;
+                                    y += c10.getHeight() - 2;
                                 }
                                 if (kLevel > 0) {
                                     drawEnchantTag("Kb" + getColor(kLevel) + kLevel, x, y);
@@ -179,11 +178,11 @@ public class Nametags extends Module {
                                             stack);
                                     if (pLevel > 0) {
                                         drawEnchantTag("P" + getColor(pLevel) + pLevel, x, y);
-                                        y += c10.FONT_HEIGHT - 2;
+                                        y += c10.getHeight() - 2;
                                     }
                                     if (tLevel > 0) {
                                         drawEnchantTag("Th" + getColor(tLevel) + tLevel, x, y);
-                                        y += c10.FONT_HEIGHT - 2;
+                                        y += c10.getHeight() - 2;
                                     }
                                     if (uLevel > 0) {
                                         drawEnchantTag("Unb" + getColor(uLevel) + uLevel, x, y);
@@ -195,12 +194,12 @@ public class Nametags extends Module {
 
                                     if (powLevel > 0) {
                                         drawEnchantTag("Pow" + getColor(powLevel) + powLevel, x, y);
-                                        y += c10.FONT_HEIGHT - 2;
+                                        y += c10.getHeight() - 2;
                                     }
 
                                     if (punLevel > 0) {
                                         drawEnchantTag("Pun" + getColor(punLevel) + punLevel, x, y);
-                                        y += c10.FONT_HEIGHT - 2;
+                                        y += c10.getHeight() - 2;
                                     }
 
                                     if (fireLevel > 0) {
@@ -385,7 +384,7 @@ public class Nametags extends Module {
         GlStateManager.disableDepth();
         x = (int) (x * 1.05D);
         y -= 6;
-        Oxygen.INSTANCE.fontmanager.comfortaa10.drawStringWithColor(text, x + 9, -30 - y, ColorUtils.getColor(255));
+        Oxygen.INSTANCE.fontmanager.comfortaa10.drawStringWithShadow(text, x + 9, -30 - y, ColorUtils.getColor(255));
         GlStateManager.enableDepth();
         GlStateManager.popMatrix();
     }

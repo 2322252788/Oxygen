@@ -2,7 +2,7 @@ package cn.rainbow.oxygen.gui.clickgui.brisk.elements.mod;
 
 import cn.rainbow.oxygen.Oxygen;
 import cn.rainbow.oxygen.gui.clickgui.brisk.ClickUI;
-import cn.rainbow.oxygen.gui.font.UnicodeFontRenderer;
+import cn.rainbow.oxygen.gui.font.CFontRenderer;
 import cn.rainbow.oxygen.module.Module;
 import cn.rainbow.oxygen.module.modules.render.ClickGui;
 import cn.rainbow.oxygen.utils.render.ColorUtils;
@@ -12,8 +12,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
-
-import java.awt.*;
 
 public class UIMods {
 	
@@ -34,7 +32,7 @@ public class UIMods {
 	}
 	
 	public void draw() {
-		UnicodeFontRenderer font = Oxygen.INSTANCE.fontmanager.segoe18;
+		CFontRenderer font = Oxygen.INSTANCE.fontmanager.segoe18;
 
 		if (this.mod.getEnabled()) {
 			RenderUtil.drawRect(this.parent.x + 102, this.y - 2, this.parent.x + 200, this.y + 16, ClickGui.getMode().isCurrentMode("Light") ? ColorUtils.AZURE.c : ColorUtils.GREY.c);

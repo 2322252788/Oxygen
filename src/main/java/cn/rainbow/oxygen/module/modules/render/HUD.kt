@@ -14,7 +14,6 @@ import cn.rainbow.oxygen.utils.render.BlurBuffer
 import cn.rainbow.oxygen.utils.render.ColorUtils
 import cn.rainbow.oxygen.utils.render.RenderUtil
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.client.resources.I18n
@@ -63,7 +62,7 @@ class HUD: Module("HUD", Render) {
                 Oxygen.INSTANCE.fontmanager.wqy20.drawString("FPS:" + Minecraft.getDebugFPS(), 92.0f / 2.0f - 39.0f, 55.0f, logoColor)
             }
             if (this.array.currentValue) {
-                val font: FontRenderer = Oxygen.INSTANCE.fontmanager.segoe17
+                val font = Oxygen.INSTANCE.fontmanager.segoe17
 
                 var yCount = 2
                 var counter = 0
@@ -90,17 +89,17 @@ class HUD: Module("HUD", Render) {
                             RenderUtil.reAlpha(ColorUtils.BLACK.c, 0.55f)
                         )
                         font.drawStringWithShadow(
-                            m.name, (sr.scaledWidth - font.getStringWidth(modText) - 2).toFloat(),
-                            (yCount - 2).toFloat(), ColorUtils.WHITE.c
+                            m.name, (sr.scaledWidth - font.getStringWidth(modText) - 3).toDouble(),
+                            (yCount - 3).toDouble(), ColorUtils.WHITE.c
                         )
                         if (m.displayName != "") {
                             font.drawStringWithShadow(
                                 " " + m.displayName,
-                                sr.scaledWidth.toFloat() - font.getStringWidth(" " + m.displayName) - 2,
-                                (yCount - 2).toFloat(), Color(180, 180, 180).rgb
+                                sr.scaledWidth.toDouble() - font.getStringWidth(" " + m.displayName) - 3,
+                                (yCount - 3).toDouble(), Color(180, 180, 180).rgb
                             )
                         }
-                        yCount += font.FONT_HEIGHT + 1
+                        yCount += font.height
                         counter ++
                     }
                 }

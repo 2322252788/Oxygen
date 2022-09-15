@@ -4,7 +4,6 @@ import java.util.List;
 
 import cn.rainbow.oxygen.Oxygen;
 import cn.rainbow.oxygen.event.events.ChatEvent;
-import cn.rainbow.oxygen.gui.font.cfont.CFontRenderer;
 import cn.rainbow.oxygen.module.modules.render.HUD;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import org.lwjgl.opengl.GL11;
@@ -168,8 +167,7 @@ public abstract class MixinGuiNewChat extends Gui {
 
                                 GlStateManager.enableBlend();
                                 if (hud.getChatFont().getCurrentValue()) {
-                                	CFontRenderer font = Oxygen.INSTANCE.fontmanager.wqy18;
-                                	font.drawStringWithShadowForChat(s, i2, j2 - 7.5f, 16777215 + (l1 << 24));
+                                    Oxygen.INSTANCE.fontmanager.wqy18.drawStringWithShadow(s, i2, j2 - 7.5f, 16777215 + (l1 << 24));
                                 } else {
                                     this.mc.fontRendererObj.drawStringWithShadow(s, (float)i2, (float)(j2 - 8), 16777215 + (l1 << 24));
                                 }

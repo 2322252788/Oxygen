@@ -1,7 +1,7 @@
 package cn.rainbow.oxygen.gui.buttons;
 
 import cn.rainbow.oxygen.Oxygen;
-import cn.rainbow.oxygen.gui.font.cfont.CFontRenderer;
+import cn.rainbow.oxygen.gui.font.CFontRenderer;
 import cn.rainbow.oxygen.utils.render.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;

@@ -3,17 +3,15 @@ package cn.rainbow.oxygen.gui.clickgui.brisk.elements.mod.menu;
 import cn.rainbow.oxygen.Oxygen;
 import cn.rainbow.oxygen.gui.clickgui.brisk.elements.mod.UIMods;
 import cn.rainbow.oxygen.gui.clickgui.brisk.elements.mod.UISettings;
-import cn.rainbow.oxygen.gui.font.UnicodeFontRenderer;
+import cn.rainbow.oxygen.gui.font.CFontRenderer;
 import cn.rainbow.oxygen.module.modules.render.ClickGui;
 import cn.rainbow.oxygen.module.setting.Setting;
 import cn.rainbow.oxygen.utils.render.ColorUtils;
 import cn.rainbow.oxygen.utils.render.RenderUtil;
 
-import java.awt.*;
-
 public class UICombo extends UISettings {
 	
-	private Setting set;
+	private final Setting set;
 	private int width;
 	private int x;
 	private float y;
@@ -30,7 +28,7 @@ public class UICombo extends UISettings {
 		this.width = 0;
 		Oxygen.INSTANCE.fontmanager.wqy15.drawString(this.set.getName(), this.x, (int) this.y, ClickGui.getMode().isCurrentMode("Light") ? ColorUtils.BLACK.c : ColorUtils.WHITE.c);
 		int height = 12;
-		UnicodeFontRenderer font = Oxygen.INSTANCE.fontmanager.segoe15;
+		CFontRenderer font = Oxygen.INSTANCE.fontmanager.segoe15;
 		
 		for (int i = 0; i < this.set.getModeValue().getOptions().size(); i++) {
 			String modName = this.set.getModeValue().getOptions().get(i);
@@ -59,7 +57,7 @@ public class UICombo extends UISettings {
 		if (mouseButton == 0) {
 			int width = 0;
 			int height = 12;
-			UnicodeFontRenderer font = Oxygen.INSTANCE.fontmanager.segoe15;
+			CFontRenderer font = Oxygen.INSTANCE.fontmanager.segoe15;
 			for (String s : this.set.getModeValue().getOptions()) {
 				if (mouseX >= x + width && mouseX <= x + width + 4 && mouseY >= (this.y + height + 4) && mouseY <= (this.y + height + 8)) {
 					Oxygen.INSTANCE.settingManager.getSetting(UIMods.extended, this.set.getName()).getModeValue().setCurrentValue(s);

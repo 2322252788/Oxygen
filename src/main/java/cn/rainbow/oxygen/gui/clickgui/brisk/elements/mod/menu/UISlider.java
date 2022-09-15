@@ -9,7 +9,6 @@ import cn.rainbow.oxygen.utils.render.ColorUtils;
 import cn.rainbow.oxygen.utils.render.RenderUtil;
 import net.minecraft.util.MathHelper;
 
-import java.awt.*;
 import java.text.DecimalFormat;
 
 public class UISlider extends UISettings {
@@ -56,7 +55,7 @@ public class UISlider extends UISettings {
 		double percentBar = (set.getCurrentValue() - set.getMinValue()) / (set.getMaxValue() - set.getMinValue());
 		this.animationX = RenderUtil.getAnimationState(this.animationX, this.x + (percentBar * this.width), ((this.x > this.animationX) ? (this.animationX + this.x) : Math.abs(this.animationX - this.x)) * 5);
 		RenderUtil.drawLine(this.x, this.y, this.animationX, this.y, 3, ClickGui.getMode().isCurrentMode("Dark") ? ColorUtils.GREY.c : ColorUtils.AZURE.c);
-		RenderUtil.drawCircle(this.animationX, this.y, this.dragging ? 1.5F : 2, ClickGui.getMode().isCurrentMode("Dark") ? ColorUtils.WHITE.c : ColorUtils.AZURE.c);
+		RenderUtil.circle((float) this.animationX, this.y, this.dragging ? 1.5F : 2, ClickGui.getMode().isCurrentMode("Dark") ? ColorUtils.WHITE.c : ColorUtils.AZURE.c);
 		if (this.dragging) {
 			double diff = set.getMaxValue() - set.getMinValue();
 			double val = set.getMinValue() + (MathHelper.clamp_double((mouseX - x) / (double) width, 0, 1)) * diff;

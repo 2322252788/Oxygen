@@ -2,13 +2,11 @@ package cn.rainbow.oxygen.gui.clickgui.brisk.elements.mod.menu;
 
 import cn.rainbow.oxygen.Oxygen;
 import cn.rainbow.oxygen.gui.clickgui.brisk.elements.mod.UISettings;
-import cn.rainbow.oxygen.gui.font.UnicodeFontRenderer;
+import cn.rainbow.oxygen.gui.font.CFontRenderer;
 import cn.rainbow.oxygen.module.modules.render.ClickGui;
 import cn.rainbow.oxygen.module.setting.Setting;
 import cn.rainbow.oxygen.utils.render.ColorUtils;
 import cn.rainbow.oxygen.utils.render.RenderUtil;
-
-import java.awt.*;
 
 public class UICheck extends UISettings {
 	
@@ -25,11 +23,11 @@ public class UICheck extends UISettings {
 	public float draw(int x, float y, int mouseX) {
 		this.x = x;
 		this.y = (int) y;
-		UnicodeFontRenderer font = Oxygen.INSTANCE.fontmanager.segoe15;
+		CFontRenderer font = Oxygen.INSTANCE.fontmanager.segoe15;
 		font.drawString(this.set.getName(), this.x, this.y, ClickGui.getMode().isCurrentMode("Light") ? ColorUtils.BLACK.c : ColorUtils.WHITE.c);
 		this.x += font.getStringWidth(this.set.getName()) + 10;
 		RenderUtil.drawOutRoundRectLine(this.x, this.y + 6, this.x + 8, this.y + 6, 4, 2, ColorUtils.SILVER.c);
-		RenderUtil.drawCircle(this.set.getBooleanValue().getCurrentValue() ? this.x + 8 : this.x, this.y + 6, 3, circleColor(this.set.getBooleanValue().getCurrentValue()));
+		RenderUtil.circle(this.set.getBooleanValue().getCurrentValue() ? this.x + 8 : this.x, this.y + 6, 3, circleColor(this.set.getBooleanValue().getCurrentValue()));
 		return this.y;
 	}
 
